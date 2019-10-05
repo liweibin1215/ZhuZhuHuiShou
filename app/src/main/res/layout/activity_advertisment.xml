@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_advertisment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rys.smartrecycler.view.activity.entrance.AdvertismentActivity">
+
+    <SurfaceView
+        android:visibility="visible"
+        android:id="@+id/sf_adv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true" />
+
+    <com.youth.banner.Banner
+        android:visibility="gone"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:indicator_width="22dp"
+        app:indicator_height="22dp"
+        app:indicator_drawable_selected="@drawable/indicator_drawable_selected"
+        app:indicator_drawable_unselected="@drawable/indicator_drawable_unselected">
+    </com.youth.banner.Banner>
+</RelativeLayout>

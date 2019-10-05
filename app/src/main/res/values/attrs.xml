@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BoxProgressView">
+        <attr name="box_label" format="string" />
+        <attr name="box_percent" format="integer" />
+    </declare-styleable>
+</resources>

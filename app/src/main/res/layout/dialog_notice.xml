@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/statuscolor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#44000000">
+
+        <RelativeLayout
+            android:layout_width="800dp"
+            android:layout_height="451dp"
+            android:padding="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/yunyan_btn_corner_white">
+
+            <TextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_theme"
+                android:textSize="40sp"
+                android:text="10s"
+                android:layout_alignParentRight="true"
+               />
+
+            <TextView
+                android:id="@+id/tv_alert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4A4A4A"
+                android:layout_below="@id/tv_timer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:text="当前设备密码错误，请联系客服人员！"/>
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="140dp"
+                android:layout_height="54dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_theme_selector"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="240dp"
+                    android:layout_height="80dp"
+                    android:src="@mipmap/ic_logo" />
+
+                <TextView
+                    android:id="@+id/tv_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="客服电话：400-086-8784"
+                    android:textColor="#4A4A4A"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

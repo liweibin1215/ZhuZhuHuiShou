@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.rys.smartrecycler">
+
+    <!-- 检测网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
+    <uses-permission android:name="android.permission.access_SUP"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 往sd卡里写读写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 摄像头调用权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- 接受系统开机广播权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 手机状态权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <!--mqtt权限-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <application
+        android:allowBackup="true"
+        android:icon="${app_icon}"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:name=".application.BaseApplication"
+        tools:replace="android:allowBackup,android:label">
+        <activity android:name=".view.activity.entrance.MainHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.activity.entrance.AdvertismentActivity"
+            android:launchMode="singleTop" />
+
+        <service
+            android:name=".service.dataup.DataUpService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.mqtt.MqttService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <activity android:name=".view.activity.entrance.AdminHomeActivity"
+                  android:launchMode="singleTop"
+                  ></activity>
+    </application>
+
+</manifest>

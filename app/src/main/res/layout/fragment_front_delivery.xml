@@ -1,0 +1,519 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                tools:context="com.rys.smartrecycler.view.fragment.FrontDeliveryFragment">
+
+
+    <Button
+        android:id="@+id/btn_delivery_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_theme_selector"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="回收完成"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_delivery_info"
+        android:layout_width="600dp"
+        android:layout_height="180dp"
+        android:layout_above="@+id/btn_delivery_finish"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:id="@+id/tv_tou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:text="投"
+            android:textColor="@color/black_theme_one"
+            android:textSize="40sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_yi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="已"
+            android:layout_above="@+id/tv_tou"
+            android:textColor="@color/black_theme_one"
+            android:textSize="40sp"
+            />
+        <TextView
+            android:id="@+id/tv_di"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tou"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text="递"
+            android:textColor="@color/black_theme_one"
+            android:textSize="40sp"
+            />
+
+        <View
+            android:id="@+id/ll_line"
+            android:layout_width="2dp"
+            android:layout_height="180dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@+id/tv_tou"
+            android:background="@color/black_theme_one"/>
+
+        <TextView
+            android:id="@+id/tv_desk_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@+id/ll_line"
+            android:text=""
+            android:textColor="@color/black_theme_one"
+            android:textSize="35sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_deliver_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text=""
+            android:textColor="@color/black_theme_one"
+            android:textSize="35sp"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_errot_content"
+        android:layout_width="1000dp"
+        android:layout_height="600dp"
+        android:layout_above="@+id/rl_delivery_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:background="#F8F8F8"
+        android:clickable="true"
+        android:visibility="gone"
+        app:cardBackgroundColor="#F8F8F8"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/tv_error_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:text="提示"
+                android:textColor="@color/black_theme_one"
+                android:textSize="60sp"
+                />
+
+            <View
+                android:id="@+id/ll_error_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/tv_error_title"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/black_theme_thr"
+                />
+
+            <ImageView
+                android:id="@+id/img_cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="50dp"
+                android:background="@mipmap/ic_cancel"
+                />
+
+            <TextView
+                android:id="@+id/tv_error_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_error_line"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:text="您投递的物品太轻，获取环保金最低需要60g以上噢"
+                android:textColor="@color/black_theme_one"
+                android:textSize="30sp"
+                />
+
+            <Button
+                android:id="@+id/btn_error_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/btn_theme_selector"
+                android:paddingLeft="80dp"
+                android:paddingRight="80dp"
+                android:text="确认"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:visibility="gone"
+        android:id="@+id/cv_icon_content1"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_delivery_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:clickable="true"
+        app:cardBackgroundColor="#E0ECF6"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E0ECF6"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_icon_logo1"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="40dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_below="@+id/ll_icon_logo1"
+                android:id="@+id/ll_icon_logo5"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="40dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_icon_logo2"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/ll_icon_logo1"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_icon_logo6"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="40dp"
+                android:layout_below="@+id/ll_icon_logo2"
+                android:layout_toRightOf="@+id/ll_icon_logo5"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_icon_logo3"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/ll_icon_logo2"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_icon_logo4"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:visibility="gone"
+        android:id="@+id/cv_icon_content2"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_delivery_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:clickable="true"
+        app:cardBackgroundColor="#E0ECF6"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E0ECF6"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/ll_icon_logo7"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="130dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text=""
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ll_icon_logo8"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text=""
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_icon_logo9"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="130dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ig_icon_logo9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_icon_info9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text=""
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_icon_title"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:layout_marginTop="130dp"
+        >
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            android:layout_toLeftOf="@+id/tv_title"
+            android:background="@color/color_black"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="箱门已开，请开始投递"
+            android:textColor="@color/color_black"
+            android:textSize="40sp"
+            />
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@+id/tv_title"
+            android:background="@color/color_black"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/blue_theme"
+        android:textSize="50sp"
+        android:padding="50dp"
+        android:layout_alignParentRight="true"
+        />
+</RelativeLayout>

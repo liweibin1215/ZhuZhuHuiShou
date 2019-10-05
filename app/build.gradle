@@ -1,0 +1,122 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+ext {
+    /*开发服务期：
+       Formal(正式)、Test(测试)*/
+    serverType = '"Test"'
+    isAutoTest ="true"
+
+}
+android {
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'smartrecycler'
+            keyPassword '51951868'
+            storeFile file('../app/keystore.jks')
+            storePassword '51951868'
+        }
+    }
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.rys.smartrecycler"
+        minSdkVersion 16
+        targetSdkVersion 21
+        versionCode 1
+        versionName '1.0.0'
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        /*开发服务期：Formal（正式）、Test（测试）*/
+        buildConfigField "String", "serverType", serverType
+        buildConfigField "boolean","IS_AUTO_TEST",isAutoTest
+        signingConfig signingConfigs.releaseConfig
+        jackOptions {
+            enabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+//        applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    if (variant.buildType.name == "release") {
+//                        outputFileName = "KD_"+ variant.productFlavors[0].name + "_" + new SimpleDateFormat("MM-dd").format(new Date())+"_"+(serverType.equals('"Formal"')?"Formal":serverType.equals('"Gray"')?"Gray":serverType.equals('"Test"')?"Test":"Develop")+"_"+"c${variant.versionCode}_" +"v${variant.versionName}.apk";
+//                    }
+//                }
+//        }
+        applicationVariants.all {
+            variant ->
+                variant.outputs.each { output ->
+                    if (variant.buildType.name == "release") {
+                        output.outputFile = new File(
+                                output.outputFile.parent,
+                                output.outputFile.name.replace(output.outputFile.name, variant.productFlavors[0].name + "_" + new SimpleDateFormat("MM-dd").format(new Date()) + "_" + (serverType.equals('"Formal"') ? "Formal" : "Test") + "_" + "c${variant.versionCode}_" + "v${variant.versionName}.apk"))
+                    }
+                }
+        }
+
+    }
+    productFlavors {
+        SmartRecycler {
+            // 每个环境包名不同
+            applicationId "com.rys.smartrecycler"
+            versionCode 1
+            versionName "1.0.0"
+            resValue "string", "app_name", "SmartRecycler"
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [CHANNEL_VALUE: "SmartRecycler"
+                                    , app_icon   : "@mipmap/ic_launcher"]
+        }
+    }
+    greendao {
+        schemaVersion 4
+        daoPackage 'com.rys.smartrecycler.db.greendao'
+        targetGenDir 'src/main/java'
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'MissingTranslation'
+    }
+    dexOptions {
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "4g"
+        //incremental true
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile('com.android.support:support-v4:26+') {
+        exclude module: 'support-v7'
+    }
+    compile 'com.android.support:support-v4:26.1.0'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'org.greenrobot:eventbus:3.1.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    //    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
+    //    compile 'org.eclipse.paho:or.eclipse.paho.android.service:1.1.1'
+    compile 'com.aliyun.alink.linksdk:iot-linkkit:1.6.5'
+    compile 'com.youth.banner:banner:1.4.10'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:multidex:1.0.0'
+    compile project(':framelibrary')
+    compile files('libs/zxing.jar')
+}

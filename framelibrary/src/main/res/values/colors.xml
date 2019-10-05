@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#388AF9</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#F97664</color>
+    <color name="transblack">#e0000000</color>
+    <color name="statuscolor">#00000000</color>
+    <color name="primaryback">#ECF1F6</color>
+    <color name="primarytext">#4A4A4A</color>
+    <color name="primarywhite">#ffffff</color>
+    <color name="settingColor">#505050</color>
+    <color name="tool_bar_color">#979797</color>
+    <color name="tab_bar_blue">#0081EB</color>
+    <color name="divider">#F7F7F7</color>
+    <color name="color_black">#1C1C1C</color>
+    <color name="color_gray">#444444</color>
+    <color name="color_gray2">#9B9B9B</color>
+    <color name="color_blue2">#579CFC</color>
+    <color name="color_blue_f7">#1274F7</color>
+    <color name="title_back_color">#506182</color>
+    <color name="back_line_3">#f6b26b</color>
+    <color name="function_coler">#F4F4F4</color>
+    <color name="function_color">#D0D0D0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bg_txt_f8">#f8f8f8</color>
+
+
+    <color name="blue_theme">#579CFC</color>
+    <color name="gray_theme">#505050</color>
+
+</resources>

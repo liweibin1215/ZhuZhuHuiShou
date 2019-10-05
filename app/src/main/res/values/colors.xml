@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="blue_theme">#347DC3</color>
+    <color name="gray_theme">#E5E5E5</color>
+    <color name="gray_lower">#CCCCCC</color>
+    <color name="black_theme_one">#0A1927</color>
+    <color name="black_theme_two">#181818</color>
+    <color name="black_theme_thr">#CCCCCC</color>
+    <color name="red_error">#FF0000</color>
+    <color name="green_formal">#33FF00</color>
+</resources>

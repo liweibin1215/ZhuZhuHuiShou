@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.rys.smartrecycler.view.fragment.FrontDeliveryEndFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_delivery_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_delivery_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/btn_gray_selector"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="退出登录"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            />
+
+        <Button
+            android:id="@+id/btn_delivery_go_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/btn_theme_selector"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="继续回收"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            />
+    </LinearLayout>
+
+   <RelativeLayout
+       android:id="@+id/rl_delivery_info"
+       android:layout_above="@+id/ll_delivery_finish"
+       android:layout_width="800dp"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:layout_marginBottom="150dp"
+       >
+
+       <TextView
+           android:id="@+id/tv_delivery_name"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text=""
+           android:textSize="40sp"
+           android:textColor="@color/black_theme_one"
+           android:layout_marginLeft="120dp"
+           />
+
+       <TextView
+           android:id="@+id/tv_delivery_num"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text=""
+           android:textSize="30sp"
+           android:textColor="@color/black_theme_one"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="120dp"
+           />
+       <View
+           android:id="@+id/ll_line"
+           android:layout_marginTop="20dp"
+           android:layout_below="@+id/tv_delivery_name"
+           android:layout_width="match_parent"
+           android:layout_height="2dp"
+           android:background="@color/black_theme_thr"
+       />
+
+       <TextView
+           android:layout_marginTop="20dp"
+           android:layout_below="@+id/ll_line"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="获环保金"
+           android:textSize="40sp"
+           android:textColor="#DF6B0C"
+           android:layout_marginLeft="120dp"
+           />
+
+       <TextView
+           android:layout_marginTop="20dp"
+           android:layout_below="@+id/ll_line"
+           android:id="@+id/tv_delivery_money"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text=""
+           android:textSize="30sp"
+           android:textColor="#DF6B0C"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="120dp"
+           />
+   </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_delivery_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="40sp"
+        android:layout_above="@+id/rl_delivery_info"
+        android:layout_marginBottom="200dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_black"
+        />
+
+    <ImageView
+        android:id="@+id/ig_delivery_result"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_above="@+id/tv_delivery_result"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/blue_theme"
+        android:textSize="50sp"
+        android:padding="50dp"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>

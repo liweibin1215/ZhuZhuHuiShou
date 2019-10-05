@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.rys.smartrecycler.view.fragment.RecycleFinishFragment">
+
+
+    <LinearLayout
+        android:id="@+id/ll_recycle_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_recycle_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/btn_gray_selector"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="退出登录"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            />
+
+        <Button
+            android:id="@+id/btn_recycle_go_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/btn_theme_selector"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="继续回收"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_recycle_info"
+        android:layout_above="@+id/ll_recycle_finish"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        >
+        <TextView
+            android:id="@+id/tv_recycle_desk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="40sp"
+            android:textColor="@color/black_theme_one"
+            android:layout_marginLeft="120dp"
+            />
+        <TextView
+            android:id="@+id/tv_recycle_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="40sp"
+            android:textColor="@color/black_theme_one"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_recycle_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="40sp"
+            android:textColor="@color/black_theme_one"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="120dp"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_recycle_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回收成功"
+        android:textSize="50sp"
+        android:layout_above="@+id/rl_recycle_info"
+        android:layout_marginBottom="200dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_black"
+        />
+
+    <ImageView
+        android:id="@+id/ig_recycle_result"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_above="@+id/tv_recycle_result"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/blue_theme"
+        android:textSize="50sp"
+        android:padding="50dp"
+        android:layout_alignParentRight="true"
+        />
+</RelativeLayout>
