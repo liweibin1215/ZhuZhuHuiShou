@@ -6,7 +6,7 @@ apply plugin: 'org.greenrobot.greendao'
 ext {
     /*开发服务期：
        Formal(正式)、Test(测试)*/
-    serverType = '"Test"'
+    serverType = '"Formal"'
     isAutoTest ="true"
 
 }
