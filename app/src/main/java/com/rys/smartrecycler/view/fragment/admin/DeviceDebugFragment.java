@@ -109,33 +109,42 @@ public class DeviceDebugFragment extends BaseTitleFragment {
      * 监听初始化
      */
     public void initListber(){
-        btnBoard.setOnClickListener(v -> {
-            String choiced = boardCom.getSelectedItem().toString();
-            if(!boardComString.equals(choiced)){
-                SystemSetController.addSystemSet("MainboardCom",choiced,"主板串口");
+        btnBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String choiced = boardCom.getSelectedItem().toString();
+                if (!boardComString.equals(choiced)) {
+                    SystemSetController.addSystemSet("MainboardCom", choiced, "主板串口");
+
+                }
+                DeviceDebugFragment.this.startFragmentAndFinishSelf(DeviceDebugFragment.this, new BoardDebugFragment(), BoardDebugFragment.TAG, R.id.fy_admin_id);
+
 
             }
-            startFragmentAndFinishSelf(this,new BoardDebugFragment(),BoardDebugFragment.TAG,R.id.fy_admin_id);
-
-
         });
-        btnBalance.setOnClickListener(v ->{
-            String choiced = balanceCom.getSelectedItem().toString();
-            if(!balanceString.equals(choiced)){
-                SystemSetController.addSystemSet("BalanceCom",choiced,"电子秤串口");
+        btnBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String choiced = balanceCom.getSelectedItem().toString();
+                if (!balanceString.equals(choiced)) {
+                    SystemSetController.addSystemSet("BalanceCom", choiced, "电子秤串口");
 
+                }
+                DeviceDebugFragment.this.startFragmentAndFinishSelf(DeviceDebugFragment.this, new BalanceDebugFragment(), BalanceDebugFragment.TAG, R.id.fy_admin_id);
             }
-            startFragmentAndFinishSelf(this,new BalanceDebugFragment(),BalanceDebugFragment.TAG,R.id.fy_admin_id);
         });
 
-        btnSmod.setOnClickListener(v ->{
-            String choiced = smodCom.getSelectedItem().toString();
-            if(!smodComString.equals(choiced)){
-                SystemSetController.addSystemSet("SmogAlarmCom",choiced,"报警器串口");
+        btnSmod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String choiced = smodCom.getSelectedItem().toString();
+                if (!smodComString.equals(choiced)) {
+                    SystemSetController.addSystemSet("SmogAlarmCom", choiced, "报警器串口");
+
+                }
+                DeviceDebugFragment.this.startFragmentAndFinishSelf(DeviceDebugFragment.this, new SmodFragment(), SmodFragment.TAG, R.id.fy_admin_id);
 
             }
-            startFragmentAndFinishSelf(this,new SmodFragment(),SmodFragment.TAG,R.id.fy_admin_id);
-
         });
     }
 }

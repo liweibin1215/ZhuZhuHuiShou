@@ -22,6 +22,7 @@ import com.rys.smartrecycler.tool.AppTool;
 import com.rys.smartrecycler.tool.NumberUtil;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -106,48 +107,51 @@ public class RecycleOperatorPresenter extends BasePresenterImpl<RecycleOperatorA
 
     @Override
     public void openDeviceDoor() {
-        Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-            if (deskConfigBean.getDeskType() != 1) {//非饮料瓶副柜，需要电子秤打开
-                //如果此时不是选择的饮料瓶，则需开门前计算当前总量
-                if (!BalanceManager.getInstance().isDeviceOpened()) {
-                    if (!BalanceManager.getInstance().openMainBoardDevice()) {
-                        deviceErrorType = 1;//电子秤故障
-                        LogController.insrtAlarmLog("回收员回收","电子秤打开失败");
-                        emitter.onNext(false);
-                        return;
+        Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+                if (deskConfigBean.getDeskType() != 1) {//非饮料瓶副柜，需要电子秤打开
+                    //如果此时不是选择的饮料瓶，则需开门前计算当前总量
+                    if (!BalanceManager.getInstance().isDeviceOpened()) {
+                        if (!BalanceManager.getInstance().openMainBoardDevice()) {
+                            deviceErrorType = 1;//电子秤故障
+                            LogController.insrtAlarmLog("回收员回收", "电子秤打开失败");
+                            emitter.onNext(false);
+                            return;
+                        }
                     }
-                }
 //                String weight = BalanceManager.getInstance().getWeight(0,deskAdress);
 //                if("".equals(weight)){
 //                    deviceErrorType = 1;//电子秤故障
 //                    emitter.onNext(false);
 //                }
 //                lastBalanceWeight = Integer.parseInt(weight);
-            }
-            if (!MainBoardManager.getInstance().isDeviceOpened()) {
-                if (!MainBoardManager.getInstance().openMainBoardDevice()) {
+                }
+                if (!MainBoardManager.getInstance().isDeviceOpened()) {
+                    if (!MainBoardManager.getInstance().openMainBoardDevice()) {
+                        deviceErrorType = 2;//标记回收们故障
+                        LogController.insrtAlarmLog("回收员回收", "主板打开失败");
+                        emitter.onNext(false);
+                        return;
+                    }
+                }
+                boolean isDoorOpen = false;
+                long openTime = System.currentTimeMillis();
+                MainBoardManager.getInstance().openDeskRecycDoor(deskConfigBean.getDeskNo(), 3);
+                while (System.currentTimeMillis() - openTime < 5000) {
+                    if (MainBoardManager.getInstance().checkDeskRecycDoorIsClosed(deskConfigBean.getDeskNo()) == 1) {
+                        isDoorOpen = true;
+                        break;
+                    }
+                    Thread.sleep(100);
+                }
+                if (!isDoorOpen) {
+                    LogController.insrtAlarmLog("回收员回收", "回收门打开失败");
                     deviceErrorType = 2;//标记回收们故障
-                    LogController.insrtAlarmLog("回收员回收","主板打开失败");
-                    emitter.onNext(false);
-                    return;
                 }
+                emitter.onNext(isDoorOpen);
+                emitter.onComplete();
             }
-            boolean isDoorOpen = false;
-            long openTime = System.currentTimeMillis();
-            MainBoardManager.getInstance().openDeskRecycDoor(deskConfigBean.getDeskNo(),3);
-            while (System.currentTimeMillis() - openTime < 5000) {
-                if (MainBoardManager.getInstance().checkDeskRecycDoorIsClosed(deskConfigBean.getDeskNo()) == 1) {
-                    isDoorOpen = true;
-                    break;
-                }
-                Thread.sleep(100);
-            }
-            if (!isDoorOpen) {
-                LogController.insrtAlarmLog("回收员回收","回收门打开失败");
-                deviceErrorType = 2;//标记回收们故障
-            }
-            emitter.onNext(isDoorOpen);
-            emitter.onComplete();
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

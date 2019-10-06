@@ -35,6 +35,7 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -226,14 +227,29 @@ public class CommonHttpManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .map(responseBody -> fileDownLoadObserver.saveFile(responseBody, destDir, fileName))
+                .map(new Function<ResponseBody, Object>() {
+                    @Override
+                    public Object apply(ResponseBody responseBody) throws Exception {
+                        return fileDownLoadObserver.saveFile(responseBody, destDir, fileName);
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(file -> fileDownLoadObserver.onDownLoadSuccess(file), new Consumer<Throwable>() {
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object file) throws Exception {
+                        fileDownLoadObserver.onDownLoadSuccess((File) file);
+                    }
+                }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
                         fileDownLoadObserver.onDownLoadFail(throwable);
                     }
-                }, () -> fileDownLoadObserver.onComplete());
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        fileDownLoadObserver.onComplete();
+                    }
+                });
     }
     /**
      * 重用 使用一个单例 ObservableTransformer 线程切换

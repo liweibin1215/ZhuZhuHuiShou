@@ -15,6 +15,7 @@ import com.rys.smartrecycler.viewapi.presenter.AdvertismentPresenter;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,7 +57,12 @@ public class AdvertismentActivity extends BaseTitleActivity<AdvertismentApi.View
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);//设置指示器位置
         //banner设置方法全部调用完毕时最后调用
-        banner.setOnBannerListener(position -> goToHomeActivity());
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                AdvertismentActivity.this.goToHomeActivity();
+            }
+        });
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(AdvertismentEvent event) {

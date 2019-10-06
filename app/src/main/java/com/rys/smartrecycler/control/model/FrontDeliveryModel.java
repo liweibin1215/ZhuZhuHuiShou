@@ -34,7 +34,7 @@ public class FrontDeliveryModel extends BaseModelImpl implements FrontDeliveryAp
 
 
     @Override
-    public void createDeliveryOrder(String box_number, String box_attach_id, String type, String sum, String tel,double price, RequestCallBackListener listener) {
+    public void createDeliveryOrder(String box_number, String box_attach_id, String type, String sum, String tel,double price, final RequestCallBackListener listener) {
         Map<String,Object> params = new HashMap<>();
         params.put("box_number",box_number);
         params.put("box_attach_id",box_attach_id);

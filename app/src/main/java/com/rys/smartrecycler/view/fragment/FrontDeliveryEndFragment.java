@@ -23,6 +23,7 @@ import com.rys.smartrecycler.view.base.BaseTitleFragment;
 import com.squareup.picasso.Picasso;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -158,41 +159,44 @@ public class FrontDeliveryEndFragment extends BaseTitleFragment implements View.
     }
 
     public void loadDeskInfo(){
-        Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-            isClosing = true;
-            deskConfigBean = DeskConfigController.getDeskByDeskNo(deskNo);
-            if(deskConfigBean == null){
-                emitter.onNext(false);
-                return;
-            }
-            if(!MainBoardManager.getInstance().isDeviceOpened()){
-                if(!MainBoardManager.getInstance().openMainBoardDevice()){
-                    LogController.insrtAlarmLog("用户投递","主板打开失败");
-                    deskConfigBean.setLockStatus(1);
-                    deskConfigBean.setErrorStatus(AppTool.setError(deskConfigBean.getErrorStatus(),6,"1"));
-                    DeskConfigController.updateDesk(deskConfigBean);
+        Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+                isClosing = true;
+                deskConfigBean = DeskConfigController.getDeskByDeskNo(deskNo);
+                if (deskConfigBean == null) {
                     emitter.onNext(false);
                     return;
                 }
-            }
-            boolean isDoorOpen = false;
-            long openTime = System.currentTimeMillis();
-            MainBoardManager.getInstance().closeDeskDoor(deskConfigBean.getDeskNo());
-            while (System.currentTimeMillis() - openTime < 6000){
-                if(MainBoardManager.getInstance().checkDeskDoorStatus(deskConfigBean.getDeskNo()) == 0){
-                    isDoorOpen = true;
-                    break;
+                if (!MainBoardManager.getInstance().isDeviceOpened()) {
+                    if (!MainBoardManager.getInstance().openMainBoardDevice()) {
+                        LogController.insrtAlarmLog("用户投递", "主板打开失败");
+                        deskConfigBean.setLockStatus(1);
+                        deskConfigBean.setErrorStatus(AppTool.setError(deskConfigBean.getErrorStatus(), 6, "1"));
+                        DeskConfigController.updateDesk(deskConfigBean);
+                        emitter.onNext(false);
+                        return;
+                    }
                 }
-                Thread.sleep(100);
+                boolean isDoorOpen = false;
+                long openTime = System.currentTimeMillis();
+                MainBoardManager.getInstance().closeDeskDoor(deskConfigBean.getDeskNo());
+                while (System.currentTimeMillis() - openTime < 6000) {
+                    if (MainBoardManager.getInstance().checkDeskDoorStatus(deskConfigBean.getDeskNo()) == 0) {
+                        isDoorOpen = true;
+                        break;
+                    }
+                    Thread.sleep(100);
+                }
+                if (!isDoorOpen) {
+                    LogController.insrtAlarmLog("用户投递", "投递口关闭失败");
+                    deskConfigBean.setLockStatus(1);
+                    deskConfigBean.setErrorStatus(AppTool.setError(deskConfigBean.getErrorStatus(), 2, "1"));
+                    DeskConfigController.updateDesk(deskConfigBean);
+                }
+                emitter.onNext(isDoorOpen);
+                emitter.onComplete();
             }
-            if(!isDoorOpen){
-                LogController.insrtAlarmLog("用户投递","投递口关闭失败");
-                deskConfigBean.setLockStatus(1);
-                deskConfigBean.setErrorStatus(AppTool.setError(deskConfigBean.getErrorStatus(),2,"1"));
-                DeskConfigController.updateDesk(deskConfigBean);
-            }
-            emitter.onNext(isDoorOpen);
-            emitter.onComplete();
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

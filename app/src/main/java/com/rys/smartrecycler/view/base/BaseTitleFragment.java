@@ -111,7 +111,12 @@ public abstract class BaseTitleFragment<V extends BaseView,P extends BasePresent
         }
         btnbBack = conventView.findViewById(R.id.btn_back);
         if(btnbBack != null){
-            conventView.findViewById(R.id.btn_back).setOnClickListener(v -> onClickBack());
+            conventView.findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BaseTitleFragment.this.onClickBack();
+                }
+            });
         }
         if(mAcFragmentCall != null) {
             mAcFragmentCall.addObserver(this);

@@ -121,10 +121,13 @@ public class AdvertismentModel extends BaseModelImpl implements AdvertismentApi.
         try {
             mediaPlayer.reset();
             mediaPlayer.setDataSource(CommonConstant.SYSTEM_SOURSE_PATH+fileName);
-            mediaPlayer.setOnPreparedListener(mp -> {
-                mp.seekTo(currentPosition);
-                mp.setVolume(0.2f, 0.2f);
-                mp.start();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.seekTo(currentPosition);
+                    mp.setVolume(0.2f, 0.2f);
+                    mp.start();
+                }
             });
             mediaPlayer.prepareAsync();
         } catch (Exception e) {

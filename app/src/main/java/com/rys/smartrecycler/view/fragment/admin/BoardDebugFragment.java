@@ -112,23 +112,26 @@ public class BoardDebugFragment extends BaseTitleFragment implements View.OnClic
         conventView.findViewById(R.id.btn_get_type).setOnClickListener(this);
         conventView.findViewById(R.id.btn_get_temp).setOnClickListener(this);
         conventView.findViewById(R.id.btn_light_status).setOnClickListener(this);
-        btnLock.setOnClickListener(v -> {
-            if(vos != null && vos.size() > deskNo){
-                if(vos.get(deskNo).getLockStatus() == 0){
-                    tvShowLock.setTextColor(mContext.getResources().getColor(R.color.red_error));
-                    btnLock.setVisibility(View.VISIBLE);
-                    btnLock.setText("解锁");
-                    tvShowLock.setText("已锁定");
-                    vos.get(deskNo).setLockStatus(1);
-                    DeskConfigController.updateDesk(vos.get(deskNo));
-                }else{
-                    tvShowLock.setTextColor(mContext.getResources().getColor(R.color.green_formal));
-                    btnLock.setVisibility(View.VISIBLE);
-                    btnLock.setText("锁定");
-                    tvShowLock.setText("未锁定");
-                    vos.get(deskNo).setLockStatus(0);
-                    vos.get(deskNo).setErrorStatus("00000000");
-                    DeskConfigController.updateDesk(vos.get(deskNo));
+        btnLock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (vos != null && vos.size() > deskNo) {
+                    if (vos.get(deskNo).getLockStatus() == 0) {
+                        tvShowLock.setTextColor(mContext.getResources().getColor(R.color.red_error));
+                        btnLock.setVisibility(View.VISIBLE);
+                        btnLock.setText("解锁");
+                        tvShowLock.setText("已锁定");
+                        vos.get(deskNo).setLockStatus(1);
+                        DeskConfigController.updateDesk(vos.get(deskNo));
+                    } else {
+                        tvShowLock.setTextColor(mContext.getResources().getColor(R.color.green_formal));
+                        btnLock.setVisibility(View.VISIBLE);
+                        btnLock.setText("锁定");
+                        tvShowLock.setText("未锁定");
+                        vos.get(deskNo).setLockStatus(0);
+                        vos.get(deskNo).setErrorStatus("00000000");
+                        DeskConfigController.updateDesk(vos.get(deskNo));
+                    }
                 }
             }
         });

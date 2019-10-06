@@ -85,7 +85,12 @@ public class AdvertismentPresenter extends BasePresenterImpl<AdvertismentApi.Vie
             return;
         }
         mPlayer.reset();
-        handler.postDelayed(() -> playAdv(),1000);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AdvertismentPresenter.this.playAdv();
+            }
+        },1000);
     }
 
     public void playAdv(){
@@ -104,9 +109,12 @@ public class AdvertismentPresenter extends BasePresenterImpl<AdvertismentApi.Vie
                 mPlayer.setDisplay(getView().getHolder());
                 getModel().startPlayVedio(mPlayer,lastAdvName,0,this);
             }else{
-                handler.postDelayed(() -> {
-                    if(isViewAttached()){
-                        getView().showVedioPlay();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (AdvertismentPresenter.this.isViewAttached()) {
+                            AdvertismentPresenter.this.getView().showVedioPlay();
+                        }
                     }
                 },5000);
             }

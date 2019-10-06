@@ -35,7 +35,7 @@ public class RecycleOperatorModel extends BaseModelImpl implements RecycleOperat
 
 
     @Override
-    public void recycleFinishOk(String box_number, String box_attach_id, String type, String sum, String tel, RequestCallBackListener listener) {
+    public void recycleFinishOk(String box_number, String box_attach_id, String type, String sum, String tel, final RequestCallBackListener listener) {
         Map<String,Object> params = new HashMap<>();
         params.put("box_number",box_number);
         params.put("box_attach_id",box_attach_id);

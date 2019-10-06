@@ -5,6 +5,7 @@ import com.rys.smartrecycler.net.bean.DeskSatus;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -147,11 +148,14 @@ public class AppTool {
         FileReader fr = null;
         try {
             File dir = new File("/sys/class/thermal/");
-            File[] files = dir.listFiles(file -> {
-                if (Pattern.matches("thermal_zone[0-9]+", file.getName())) {
-                    return true;
+            File[] files = dir.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File file) {
+                    if (Pattern.matches("thermal_zone[0-9]+", file.getName())) {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
             });
             final int SIZE = files.length;
             String line = "";

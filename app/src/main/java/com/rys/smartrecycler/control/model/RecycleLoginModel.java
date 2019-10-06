@@ -36,7 +36,7 @@ public class RecycleLoginModel extends BaseModelImpl implements RecycleLoginApi.
     }
 
     @Override
-    public void startGetPwdInfo(String phone, RequestCallBackListener<String> listener) {
+    public void startGetPwdInfo(String phone, final RequestCallBackListener<String> listener) {
         CommonHttpManager.observeWithNoDataTrans(CommonHttpManager.getInstance().getmApiService().userGetPassword(phone)).subscribe(mSubcriber = new BaseHttpSubscriber<String>() {
             @Override
             public void onSuccess(String s) {
